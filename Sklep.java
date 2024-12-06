@@ -1,47 +1,33 @@
 import java.util.ArrayList;
 
 public class Sklep {
-    ArrayList<Produkt> listaProduktow;
     String nazwaSklepu;
     String dataPowstania;
     Magazyn magazyn;
 
     public Sklep() {
-        listaProduktow = new ArrayList<>();
         nazwaSklepu = "Unkown";
         dataPowstania = "Unkown";
     }
-    public Sklep(ArrayList<Produkt> listaProduktow, String nazwaSklepu, String dataPowstania) {
-        this.listaProduktow = listaProduktow;
+    public Sklep(String nazwaSklepu, String dataPowstania, Magazyn magazyn) {
         this.nazwaSklepu = nazwaSklepu;
         this.dataPowstania = dataPowstania;
+        this.magazyn = magazyn;
     }
 
-
-
-    // tu nie robione
-    public void dodajProdukt(Produkt produkt) {
-        if (!listaProduktow.contains(produkt)) {
-            listaProduktow.add(produkt);
-        }
-        else {
-            Produkt existingProdukt = this.wyszukajProdukt(produkt.nazwa);
-            int index = listaProduktow.indexOf(existingProdukt);
-            listaProduktow.get(index).dodajDoMagazynu(produkt.iloscNaMagazynie);
-        }
+    public void dodajProdukt(Produkt produkt, int ilosc) {
+        magazyn.dodajDoMagazynu(produkt, ilosc);
     }
 
-    public void wyswietlOferty() {
-        System.out.println("Oferta:");
-        for (Produkt produkt : listaProduktow) {
-            System.out.println(produkt.nazwa + " " + produkt.iloscNaMagazynie);
-        }
+    @Override
+    public String toString() {
+        return magazyn.toString();
     }
 
     public Produkt wyszukajProdukt(String name){
-        for (Produkt produkt : listaProduktow) {
-            if (produkt.nazwa.equals(name)) {
-                return produkt;
+        for (Produkt p : magazyn.Produkty.keySet()) {
+            if(p.nazwa.equals(name)){
+                return p;
             }
         }
         System.out.println("Produkt nie znajduje się w magazynie");
@@ -49,6 +35,6 @@ public class Sklep {
     }
 
     public void zakupy(Produkt produkt, int x, KoszykZakupowy koszyk) {
-        koszyk.dodajProdukt(produkt, x);
+        koszyk.dodajProdukt(produkt, x, magazyn);
     }
 }

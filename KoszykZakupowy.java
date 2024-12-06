@@ -20,7 +20,7 @@ public class KoszykZakupowy {
 
     @Override
     public String toString() {
-        String str = "Magazyn:";
+        String str = "Magazyn:\n";
         for (Produkt p : listaZakupowa.keySet()) {
             str += p.nazwa + " " + listaZakupowa.get(p) + "\n";
         }
@@ -33,5 +33,15 @@ public class KoszykZakupowy {
             suma += listaZakupowa.get(p) * p.cena;
         }
         return suma;
+    }
+
+    public void usunZKoszyka(Produkt p, int ilosc, Magazyn magazyn) {
+        if (magazyn.Produkty.get(p) > ilosc) {
+            magazyn.Produkty.compute(p, (key, staraIlosc) -> staraIlosc - ilosc);
+        }
+        else{
+            magazyn.Produkty.remove(p);
+        }
+        magazyn.dodajDoMagazynu(p, ilosc);
     }
 }

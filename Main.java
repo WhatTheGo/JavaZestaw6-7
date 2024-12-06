@@ -10,36 +10,32 @@ public class Main {
         magazyn.dodajDoMagazynu(produkt, 5);
         magazyn.dodajDoMagazynu(produkt2, 5);
         System.out.println(magazyn);
-//        System.out.println("\nKoszykZakupowy\n");
-//        KoszykZakupowy koszyk = new KoszykZakupowy();
-//        koszyk.dodajProdukt(produkt);
-//        koszyk.dodajProdukt(produkt);
-//        koszyk.dodajProdukt(produkt2);
-//        koszyk.wyswietlZawartoscKoszyka();
-//        System.out.println("wartosc: " + koszyk.obliczCalkowitaWartosc());
-//
-//        System.out.println("\nZamowienie\n");
-//        Zamowienie zamowienie = new Zamowienie(koszyk, "w drodze");
-//        zamowienie.wyswietlZamowienie();
-//
-//        System.out.println("\nKlient\n");
-//        Klient klient = new Klient("Bob", "Budowniczy");
-//        klient.dodajZamowienie(zamowienie);
-//        klient.wyswietlHistorieZamowien();
-//        double koszt = klient.obliczLacznyKosztZamowien();
-//        System.out.println(koszt);
-//
-//        System.out.println("\nSklep\n");
-//        Sklep sklep = new Sklep(koszyk.uniqueElements);
-//        sklep.wyswietlOferty();
-//        sklep.dodajProdukt(produkt2);
-//        sklep.wyswietlOferty();
-//        produkt2.wyswietlInformacje();
-//        sklep.zakupy(produkt2, 8, koszyk);
-//        sklep.wyswietlOferty();
-//        System.out.println("\nProdukt\n");
-//        produkt2.wyswietlInformacje();
-//        System.out.println("\nKoszyk\n");
-//        koszyk.wyswietlZawartoscKoszyka();
+        System.out.println("\nKoszykZakupowy\n");
+        KoszykZakupowy koszyk = new KoszykZakupowy();
+        koszyk.dodajProdukt(produkt, 5, magazyn);
+        koszyk.dodajProdukt(produkt, 1, magazyn);
+        koszyk.dodajProdukt(produkt2, 2, magazyn);
+        System.out.println(koszyk);
+        System.out.println("wartosc: " + koszyk.obliczCalkowitaWartosc());
+
+        System.out.println("\nZamowienie\n");
+        Zamowienie zamowienie = new Zamowienie(koszyk, "w drodze");
+        zamowienie.wyswietlZamowienie();
+
+        System.out.println("\nKlient\n");
+        Klient klient = new Klient("Bob", "Budowniczy");
+        klient.dodajZamowienie(zamowienie);
+        klient.wyswietlHistorieZamowien();
+        double koszt = klient.obliczLacznyKosztZamowien();
+        System.out.println(koszt);
+        klient.setImie("Majkel");
+        System.out.println(klient.getImie());
+
+        System.out.println("\nSklep\n");
+        Sklep sklep = new Sklep("BiedronkaNiskieCeny", "22.11.2021", magazyn);
+        sklep.dodajProdukt(produkt2, 3);
+        System.out.println(sklep);
+        sklep.zakupy(produkt2, 3, koszyk);
+        System.out.println(sklep);
     }
 }
