@@ -11,8 +11,8 @@ public class Produkt {
         this.cena = 0;
     }
 
-    public void wyswietlInformacje(){
-        System.out.println("nazwa: " + this.nazwa);
-        System.out.println("cena: " + this.cena);
+    public String toString(){
+        return "nazwa: " + this.nazwa + "\n" +
+                "cena: " + this.cena;
     }
 }

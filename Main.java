@@ -1,14 +1,15 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Produkt\n");
         Produkt produkt = new Produkt("ziemniak", 2.50);
         Produkt produkt2 = new Produkt("ziemniakPremium", 2.90);
-        produkt.wyswietlInformacje();
+        System.out.println(produkt);
+        System.out.println(produkt2);
 
         Magazyn magazyn = new Magazyn();
         magazyn.dodajDoMagazynu(produkt, 5);
         magazyn.dodajDoMagazynu(produkt, 5);
-        System.out.println(magazyn.capitalCities);
+        magazyn.dodajDoMagazynu(produkt2, 5);
+        System.out.println(magazyn);
 //        System.out.println("\nKoszykZakupowy\n");
 //        KoszykZakupowy koszyk = new KoszykZakupowy();
 //        koszyk.dodajProdukt(produkt);

@@ -1,83 +1,37 @@
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class KoszykZakupowy {
-    ArrayList<Produkt> listaZakupowa;
-    ArrayList<Produkt> uniqueElements;
+    HashMap<Produkt, Integer> listaZakupowa;
 
     public KoszykZakupowy() {
-        this.listaZakupowa = new ArrayList<>();
-        this.uniqueElements = new ArrayList<>();
+        this.listaZakupowa = new HashMap<>();
     }
 
-    public KoszykZakupowy(ArrayList<Produkt> listaZakupowa) {
-        this.listaZakupowa = listaZakupowa;
-        this.uniqueElements = new ArrayList<>();
+    public KoszykZakupowy(HashMap<Produkt, Integer> capitalCities){
+        this.listaZakupowa = capitalCities;
     }
 
-    public boolean dodajProdukt(Produkt produkt) {
-        if (produkt.iloscNaMagazynie > 0){
-            listaZakupowa.add(produkt);
-            produkt.iloscNaMagazynie --;
+    public void dodajProdukt(Produkt produkt, int ilosc, Magazyn magazyn) {
+        if (magazyn.Produkty.get(produkt) >= ilosc) {
+            listaZakupowa.put(produkt, ilosc);
+            magazyn.usunZMagazynu(produkt, ilosc);
         }
-        else{
-            return false;
-        }
-        if (!uniqueElements.contains(produkt)) {
-            uniqueElements.add(produkt);
-        }
-        return true;
     }
 
-    public boolean dodajProdukt(Produkt produkt, int x) {
-        if (produkt.iloscNaMagazynie >= x){
-            for (int i = 0; i < x; i++) {
-                listaZakupowa.add(produkt);
-            }
-            produkt.usunZMagazynu(x);
+    @Override
+    public String toString() {
+        String str = "Magazyn:";
+        for (Produkt p : listaZakupowa.keySet()) {
+            str += p.nazwa + " " + listaZakupowa.get(p) + "\n";
         }
-        else{
-            return false;
-        }
-        if (!uniqueElements.contains(produkt)) {
-            uniqueElements.add(produkt);
-        }
-        return true;
-    }
-
-    public void wyswietlZawartoscKoszyka() {
-        int ilosc = 0;
-        for (Produkt uniqueProdukt : uniqueElements) {
-            for (Produkt produkt : listaZakupowa) {
-                if (uniqueProdukt.equals(produkt)) {
-                    ilosc++;
-                }
-            }
-            System.out.println(uniqueProdukt.nazwa + " " + ilosc);
-            ilosc=0;
-        }
+        return str;
     }
 
     public double obliczCalkowitaWartosc() {
         double suma=0;
-        for (Produkt produkt : listaZakupowa) {
-            suma += produkt.cena;
+        for (Produkt p : listaZakupowa.keySet()) {
+            suma += listaZakupowa.get(p) * p.cena;
         }
         return suma;
-    }
-
-    public void usunProdukt(Produkt produkt, int x){
-        int i=1;
-        while (i<=x) {
-            if (listaZakupowa.contains(produkt)) {
-                listaZakupowa.remove(produkt);
-                i++;
-            }
-            else{
-                break;
-            }
-        }
-        produkt.dodajDoMagazynu(i);
     }
 }
