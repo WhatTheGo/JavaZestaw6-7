@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-public class Sklep {
+public class Sklep implements SklepInterface{
     String nazwaSklepu;
     String dataPowstania;
     Magazyn magazyn;

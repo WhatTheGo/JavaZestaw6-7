@@ -1,4 +1,4 @@
-public class Adres {
+public class Adres{
     String ulica;
     int numerDomu;
     int numerMieszkania;
@@ -59,4 +59,5 @@ public class Adres {
     public void setKodPocztowy(String kodPocztowy) {
         this.kodPocztowy = kodPocztowy;
     }
+
 }

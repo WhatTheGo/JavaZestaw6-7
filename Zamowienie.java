@@ -1,9 +1,9 @@
 import java.util.Objects;
 
-public class Zamowienie {
-    KoszykZakupowy koszyk;
-    String status;
-    Platnosc platnosc;
+public class Zamowienie implements ZamowienieInterface{
+    private KoszykZakupowy koszyk;
+    private String status;
+    private Platnosc platnosc;
 
     public Zamowienie(KoszykZakupowy koszyk){
         this.koszyk = koszyk;
@@ -16,8 +16,28 @@ public class Zamowienie {
         this.platnosc = new Platnosc(koszyk.obliczCalkowitaWartosc());
     }
 
-    public void ustawStatusZamowienia(String status) {
+    public KoszykZakupowy getKoszyk() {
+        return koszyk;
+    }
+
+    public void setKoszyk(KoszykZakupowy koszyk) {
+        this.koszyk = koszyk;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Platnosc getPlatnosc() {
+        return platnosc;
+    }
+
+    public void setPlatnosc(Platnosc platnosc) {
+        this.platnosc = platnosc;
     }
 
     public void wyswietlZamowienie() {
@@ -26,14 +46,14 @@ public class Zamowienie {
     }
 
     public void finalizujZamowienie() {
-        if (Objects.equals(platnosc.statusPlatnosci, "Opłacone")){
-            this.ustawStatusZamowienia("Gotowe do wysylki");
+        if (Objects.equals(platnosc.getStatusPlatnosci(), "Opłacone")){
+            this.setStatus("Gotowe do wysylki");
         }
     }
 
     public void zwrocProdukt(Produkt produkt, int x, Magazyn magazyn) {
         koszyk.usunZKoszyka(produkt, x, magazyn);
         this.status = "zwrocone";
-        platnosc.kwota = koszyk.obliczCalkowitaWartosc();
+        platnosc.setKwota(koszyk.obliczCalkowitaWartosc());
     }
 }

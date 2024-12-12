@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Magazyn {
+public class Magazyn implements MagazynInterface{
     HashMap<Produkt, Integer> Produkty;
 
     public Magazyn() {

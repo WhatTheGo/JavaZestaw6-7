@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class KoszykZakupowy {
+public class KoszykZakupowy implements KoszykZakupowyInterface{
     HashMap<Produkt, Integer> listaZakupowa;
 
     public KoszykZakupowy() {
@@ -20,11 +20,11 @@ public class KoszykZakupowy {
 
     @Override
     public String toString() {
-        String str = "Magazyn:\n";
+        StringBuilder str = new StringBuilder("Magazyn:\n");
         for (Produkt p : listaZakupowa.keySet()) {
-            str += p.nazwa + " " + listaZakupowa.get(p) + "\n";
+            str.append(p.nazwa).append(" ").append(listaZakupowa.get(p)).append("\n");
         }
-        return str;
+        return str.toString();
     }
 
     public double obliczCalkowitaWartosc() {
@@ -37,7 +37,7 @@ public class KoszykZakupowy {
 
     public void usunZKoszyka(Produkt p, int ilosc, Magazyn magazyn) {
         if (magazyn.Produkty.get(p) > ilosc) {
-            magazyn.Produkty.compute(p, (key, staraIlosc) -> staraIlosc - ilosc);
+            magazyn.Produkty.compute(p, (_, staraIlosc) -> staraIlosc - ilosc);
         }
         else{
             magazyn.Produkty.remove(p);

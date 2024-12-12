@@ -23,7 +23,8 @@ public class Main {
         zamowienie.wyswietlZamowienie();
 
         System.out.println("\nKlient\n");
-        Klient klient = new Klient("Bob", "Budowniczy");
+        Adres adres = new Adres("adres", 43, "32", "4322asd");
+        Klient klient = new Klient("Bob", "Budowniczy", adres);
         klient.dodajZamowienie(zamowienie);
         klient.wyswietlHistorieZamowien();
         double koszt = klient.obliczLacznyKosztZamowien();
@@ -37,5 +38,12 @@ public class Main {
         System.out.println(sklep);
         sklep.zakupy(produkt2, 3, koszyk);
         System.out.println(sklep);
+
+        Produkt p3 = new Produkt("ziemniak", 2.50);
+        Produkt p4 = new Produkt("ziemniak", 2.50);
+        System.out.println("Equals = " + p3.equals(p4));
+        Klient klient2 = new Klient("Majkel", "Budowniczy", adres);
+        System.out.println("Equals = " + klient.equals(klient2));
+
     }
 }
